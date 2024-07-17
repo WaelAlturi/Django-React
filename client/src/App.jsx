@@ -1,23 +1,13 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-import URL from "./URL";
-
+import Login from "./Components/Login.jsx";
+import Home from "./Components/Home.jsx";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 export default function App() {
-  const [data, setData] = useState("");
-  const Data = async () => {
-    try {
-      const response = await axios.get(URL.base);
-      setData(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  useEffect(() => {
-    Data();
-  }, []);
   return (
-    <>
-      <div className="">Wael Alturi</div>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Home />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
