@@ -5,23 +5,34 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast, Zoom } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "material-icons/iconfont/material-icons.css";
-export default function Login() {
+export default function Login({ onLogin }) {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [status, setStatus] = useState(true);
   const [isFirstLoad, setIsFirstLoad] = useState(false);
   const navigate = useNavigate();
-
+  const handleLoginClick = () => {
+    onLogin();
+    navigate("/");
+  };
   const Login = () => {
     try {
       if (email && password) {
         axios
           .post(URL.Login, { email, password })
           .then(() => {
-            setTimeout(() => {
-              navigate("/");
-            }, 500);
+            toast.success("Welcome", {
+              position: "top-right",
+              autoClose: 1000,
+              hideProgressBar: true,
+              closeOnClick: true,
+              pauseOnHover: false,
+              draggable: true,
+              theme: "dark",
+              transition: Zoom,
+            });
+            handleLoginClick();
           })
           .catch(() => {
             toast.warning("The email address or password is incorrect", {
@@ -175,6 +186,7 @@ export default function Login() {
             <button
               onClick={() => {
                 clear();
+                handleLoginClick();
                 setStatus(!status);
                 !isFirstLoad ? setIsFirstLoad(true) : "";
               }}
