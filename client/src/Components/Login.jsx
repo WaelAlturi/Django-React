@@ -186,7 +186,6 @@ export default function Login({ onLogin }) {
             <button
               onClick={() => {
                 clear();
-                handleLoginClick();
                 setStatus(!status);
                 !isFirstLoad ? setIsFirstLoad(true) : "";
               }}
