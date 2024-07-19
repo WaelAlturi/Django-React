@@ -38,13 +38,14 @@ def register(request):
     if request.method == 'POST':
         try:
             data = json.loads(request.body)
+            fullName = data['fullName']
             email = data['email']
             password = data['password']
 
             if User.objects.filter(email=email).exists():
                 return JsonResponse({'message': 'Email already exists'}, status=400)
 
-            account = User(email=email, password=password)
+            account = User(fullName=fullName,email=email, password=password)
             account.save()
             
             return JsonResponse({'message': 'User registered successfully'}, status=201)
