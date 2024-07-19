@@ -16,6 +16,7 @@ export default function Login({ onLogin }) {
     onLogin();
     navigate("/");
   };
+  console.log(URL.Register);
   const Login = () => {
     try {
       if (email && password) {
